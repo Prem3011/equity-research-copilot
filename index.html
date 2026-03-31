@@ -2,41 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AI Equity Research Copilot | By Prem</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#f8f7ff;color:#333;min-height:100vh}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
-.hdr{background:linear-gradient(135deg,#1E1850 0%,#3B2FA0 40%,#534AB7 100%);border-radius:0 0 16px 16px;padding:28px 24px 20px;text-align:center;position:relative;overflow:hidden}
-.hdr .c1{position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04)}
-.hdr .c2{position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.03)}
-.hdr .tag{font-size:10px;font-weight:700;color:#AFA9EC;letter-spacing:2px;margin-bottom:6px}
-.hdr h1{font-size:22px;font-weight:700;color:#fff;margin:0 0 4px}
-.hdr p{font-size:12px;color:#CECBF6;margin:0}
-.input-row{display:flex;gap:8px;margin:20px 0 8px}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4ff;color:#333;min-height:100vh}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px 40px}
+.hdr{background:linear-gradient(135deg,#1E1850 0%,#3B2FA0 40%,#534AB7 100%);border-radius:0 0 18px 18px;padding:30px 24px 22px;text-align:center;position:relative;overflow:hidden}
+.hdr .c1{position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hdr .c2{position:absolute;bottom:-25px;left:-25px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.03)}
+.hdr .c3{position:absolute;top:20px;left:60px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.02)}
+.hdr .tag{font-size:10px;font-weight:700;color:#AFA9EC;letter-spacing:2.5px;margin-bottom:8px}
+.hdr h1{font-size:24px;font-weight:700;color:#fff;margin:0 0 6px}
+.hdr p{font-size:12px;color:#CECBF6;margin:0 0 12px}
+.hdr .help-btn{display:inline-block;padding:4px 14px;font-size:10px;font-weight:600;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:20px;cursor:pointer;transition:background .2s}
+.hdr .help-btn:hover{background:rgba(255,255,255,.22)}
+.guide{background:#f9f8ff;border:1px solid #e8e6f8;border-radius:12px;padding:16px;margin:14px 0;font-size:12.5px;color:#555;line-height:1.7;display:none}
+.guide.show{display:block}
+.guide b{color:#534AB7}
+.tabs{display:flex;background:#fff;border-radius:12px;border:1px solid #e8e6f8;overflow:hidden;margin:16px 0 12px}
+.tab{flex:1;padding:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:#888}
+.tab.active{background:#534AB7;color:#fff}
+.tab:hover:not(.active){background:#f4f3ff}
+.panel{display:none}.panel.show{display:block}
+.input-area{margin-bottom:8px}
+.input-row{display:flex;gap:8px}
 .input-row input{flex:1;padding:12px 16px;font-size:15px;border:2px solid #e0e0e0;border-radius:10px;outline:none;font-weight:500;background:#fff;transition:border-color .2s}
 .input-row input:focus{border-color:#534AB7}
 .input-row button{padding:12px 24px;font-size:14px;font-weight:700;color:#fff;background:linear-gradient(135deg,#534AB7,#3B2FA0);border:none;border-radius:10px;cursor:pointer;white-space:nowrap;transition:opacity .2s}
 .input-row button:disabled{background:#c8c6db;cursor:not-allowed}
 .input-row button:hover:not(:disabled){opacity:.9}
-.picks{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px}
-.picks button{padding:4px 11px;font-size:11px;font-weight:500;background:#f4f3ff;color:#534AB7;border:1px solid #e8e6f8;border-radius:14px;cursor:pointer;transition:all .2s}
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.compare-row input{padding:12px 16px;font-size:14px;border:2px solid #e0e0e0;border-radius:10px;outline:none;font-weight:500;background:#fff}
+.compare-row input:focus{border-color:#534AB7}
+.compare-row input:nth-child(2):focus{border-color:#D85A30}
+.picks{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.picks button{padding:4px 11px;font-size:11px;font-weight:500;background:#fff;color:#534AB7;border:1px solid #e8e6f8;border-radius:14px;cursor:pointer;transition:all .2s}
 .picks button:hover{background:#534AB7;color:#fff}
 .picks button.active{background:#534AB7;color:#fff}
-.loading{text-align:center;padding:40px 20px}
-.spinner{width:44px;height:44px;margin:0 auto 16px;border:3px solid #ededfa;border-top:3px solid #534AB7;border-radius:50%;animation:spin .7s linear infinite}
+.loading{text-align:center;padding:36px 20px}
+.spinner{width:42px;height:42px;margin:0 auto 14px;border:3px solid #ededfa;border-top:3px solid #534AB7;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading h3{font-size:15px;font-weight:600;color:#534AB7}
 .loading p{font-size:12px;color:#888;margin-top:4px}
-.progress{display:flex;justify-content:center;gap:5px;margin-top:14px}
-.progress .dot{width:7px;height:7px;border-radius:50%;background:#e8e6f8;transition:background .3s}
-.progress .dot.on{background:#534AB7}
-.error{padding:14px 16px;background:#FFF5F5;border:1px solid #F09595;border-radius:10px;color:#791F1F;font-size:13px;margin-bottom:16px}
-.error button{display:block;margin-top:8px;padding:6px 16px;font-size:12px;font-weight:600;background:#791F1F;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.pbar{width:200px;height:4px;background:#eae8f8;border-radius:2px;margin:12px auto 0;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,#534AB7,#7F77DD);border-radius:2px;transition:width .4s}
+.error{padding:14px 16px;background:#FFF5F5;border:1px solid #F09595;border-radius:10px;color:#791F1F;font-size:13px;margin-bottom:16px;line-height:1.6}
+.error button{display:inline-block;margin-top:8px;padding:6px 16px;font-size:12px;font-weight:600;background:#791F1F;color:#fff;border:none;border-radius:6px;cursor:pointer}
 .result-hdr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
 .result-hdr h2{font-size:20px;font-weight:800;color:#111}
-.badge{padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700}
+.toolbar{display:flex;gap:8px;margin:8px 0 14px;flex-wrap:wrap}
+.toolbar button{padding:6px 14px;font-size:11px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s}
+.btn-pdf{background:#534AB7;color:#fff;border:none}
+.btn-pdf:hover{opacity:.9}
+.btn-new{background:#fff;color:#534AB7;border:1px solid #e8e6f8}
+.btn-new:hover{background:#f4f3ff}
+.badge{padding:3px 12px;border-radius:12px;font-size:11px;font-weight:700;display:inline-block}
 .badge-bull{background:#DCFCE7;color:#166534}
 .badge-bear{background:#FEE2E2;color:#991B1B}
 .badge-neutral{background:#FEF9C3;color:#854D0E}
@@ -46,66 +67,102 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f8f7ff;color:#33
 .sec-hdr .icon{font-size:14px}
 .sec-hdr .label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
 .sec-hdr .line{flex:1;height:1px}
+.sec-hdr .hint{font-size:10px;padding:1px 7px;border-radius:8px;cursor:help;opacity:.5}
 .sec-body{font-size:13.5px;line-height:1.8;color:#333}
-.metric-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 12px;border-radius:6px;margin-bottom:3px;border:1px solid #e8f5ef}
+.metric-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 14px;border-radius:8px;margin-bottom:3px;border:1px solid #e8f5ef}
 .metric-row:nth-child(odd){background:#f8fcfa}
 .metric-row:nth-child(even){background:#fff}
 .metric-label{font-size:11px;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:.2px}
-.metric-val{font-size:14px;font-weight:700;color:#085041}
-.catalyst{position:relative;padding-left:20px;margin-bottom:12px}
-.catalyst .dot{position:absolute;left:0;top:5px;width:9px;height:9px;border-radius:50%;background:#534AB7}
+.metric-val{font-size:15px;font-weight:700;color:#085041}
+.catalyst{position:relative;padding-left:22px;margin-bottom:12px}
+.catalyst .dot{position:absolute;left:0;top:5px;width:10px;height:10px;border-radius:50%;background:#534AB7;border:2px solid #EEEDFE}
 .catalyst .date{font-size:10.5px;font-weight:700;color:#534AB7;text-transform:uppercase;letter-spacing:.3px}
 .catalyst .desc{font-size:13px;line-height:1.7;color:#333;margin-top:2px}
-.risk-card{padding:10px 14px;background:#FFF8F8;border-radius:8px;border-left:3px solid #F09595;margin-bottom:6px}
-.risk-title{font-size:12px;font-weight:700;color:#991B1B;margin-bottom:3px}
+.risk-card{padding:12px 16px;background:#FFF8F8;border-radius:10px;border-left:3px solid #F09595;margin-bottom:7px}
+.risk-title{font-size:12.5px;font-weight:700;color:#991B1B;margin-bottom:3px}
 .risk-detail{font-size:12.5px;line-height:1.7;color:#555}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bull-box{padding:12px;background:#F0FDF4;border-radius:10px;border:1px solid #BBF7D0}
-.bear-box{padding:12px;background:#FEF2F2;border-radius:10px;border:1px solid #FECACA}
+.bull-box{padding:14px;background:#F0FDF4;border-radius:10px;border:1px solid #BBF7D0}
+.bear-box{padding:14px;background:#FEF2F2;border-radius:10px;border:1px solid #FECACA}
 .case-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 .bull-label{color:#166534}
 .bear-label{color:#991B1B}
 .case-text{font-size:12.5px;line-height:1.8;color:#333}
-.peer{padding:10px 14px;border-radius:8px;margin-bottom:5px;border:1px solid #fde8df}
+.peer{padding:12px 16px;border-radius:10px;margin-bottom:5px;border:1px solid #fde8df}
 .peer:nth-child(odd){background:#FFFAF8}
 .peer:nth-child(even){background:#fff}
 .peer-name{font-size:13px;font-weight:700;color:#9A3412}
 .peer-desc{font-size:12.5px;line-height:1.7;color:#555;margin-top:3px}
-.thesis-box{padding:14px 16px;background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border-radius:10px;border:1px solid #A7F3D0;font-size:13.5px;line-height:1.85;color:#1a1a1a}
+.thesis-box{padding:16px 18px;background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border-radius:12px;border:1px solid #A7F3D0;font-size:13.5px;line-height:1.85;color:#1a1a1a}
 .disc{margin-top:18px;padding:12px;background:#f0f0f0;border-radius:8px;font-size:10px;color:#999;text-align:center;line-height:1.5}
 .footer{margin-top:24px;padding-top:14px;border-top:1px solid #e8e8e8;text-align:center;font-size:10px;color:#ccc}
-.empty{text-align:center;padding:40px 0;color:#ccc}
-.empty .big{font-size:40px;opacity:.25;margin-bottom:8px}
+.compare-results{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.compare-col{min-width:0}
+.empty{text-align:center;padding:36px 0;color:#ccc}
+.empty .big{font-size:40px;opacity:.2;margin-bottom:8px}
 .empty p{font-size:13px}
-@media(max-width:600px){.split{grid-template-columns:1fr}.metric-row{flex-wrap:wrap;gap:4px}}
+.empty .sub{font-size:11px;color:#ddd;margin-top:4px}
+@media(max-width:700px){.split{grid-template-columns:1fr}.compare-results{grid-template-columns:1fr}.compare-row{grid-template-columns:1fr}.metric-row{flex-wrap:wrap;gap:2px}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="hdr">
-    <div class="c1"></div><div class="c2"></div>
+    <div class="c1"></div><div class="c2"></div><div class="c3"></div>
     <div class="tag">AI-POWERED EQUITY RESEARCH</div>
     <h1>Equity Research Copilot</h1>
-    <p>Professional-grade research briefs in seconds • US & Indian markets • Built by Prem</p>
+    <p>Professional-grade research briefs in seconds • Any stock, any market</p>
+    <span class="help-btn" onclick="toggleGuide()">How does this work? →</span>
   </div>
 
-  <div class="input-row">
-    <input id="ticker" placeholder="Enter any stock ticker (AAPL, RELIANCE, NVDA, INFY...)" />
-    <button id="go" onclick="analyze()">Generate →</button>
+  <div class="guide" id="guide">
+    <b>Welcome!</b> This tool generates AI-powered equity research briefs — similar to what analysts at investment banks produce.<br><br>
+    <b>How to use:</b> Type any stock ticker (like AAPL for Apple, or RELIANCE for Reliance Industries) and click Generate. The AI will produce a structured research brief covering company overview, financial metrics, catalysts, risks, and an investment thesis.<br><br>
+    <b>Single vs Compare:</b> Use <b>Single Stock</b> for a deep-dive on one company. Use <b>Compare Stocks</b> to see two companies side by side — great for understanding relative strengths.<br><br>
+    <b>Glossary:</b><br>
+    • <b>P/E Ratio</b> — Price-to-Earnings. How much investors pay per dollar of earnings. Lower = cheaper.<br>
+    • <b>Market Cap</b> — Total value of all shares. Tells you how big the company is.<br>
+    • <b>ROE</b> — Return on Equity. How efficiently the company uses shareholder money. Higher = better.<br>
+    • <b>Bull Case</b> — Reasons the stock could go UP.<br>
+    • <b>Bear Case</b> — Reasons the stock could go DOWN.<br>
+    • <b>Outlook</b> — The AI's overall assessment: Bullish (positive), Neutral, or Bearish (negative).
   </div>
 
-  <div class="picks" id="picks"></div>
-  <div id="output"></div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('single')">📊 Single Stock</div>
+    <div class="tab" onclick="switchTab('compare')">⚖️ Compare Stocks</div>
+  </div>
+
+  <!-- Single Stock Panel -->
+  <div class="panel show" id="panel-single">
+    <div class="input-area">
+      <div class="input-row">
+        <input id="ticker" placeholder="Enter any stock ticker (AAPL, RELIANCE, NVDA...)" />
+        <button id="go" onclick="analyzeSingle()">Generate →</button>
+      </div>
+    </div>
+    <div class="picks" id="picks-single"></div>
+    <div id="output-single"></div>
+  </div>
+
+  <!-- Compare Panel -->
+  <div class="panel" id="panel-compare">
+    <div class="input-area">
+      <div class="compare-row">
+        <input id="ticker-a" placeholder="Stock A (e.g. AAPL)" />
+        <input id="ticker-b" placeholder="Stock B (e.g. MSFT)" style="border-color:#F0997B" />
+      </div>
+      <button id="go-compare" onclick="analyzeCompare()" style="width:100%;padding:12px;font-size:14px;font-weight:700;color:#fff;background:linear-gradient(135deg,#D85A30,#993C1D);border:none;border-radius:10px;cursor:pointer;margin-bottom:8px">Compare →</button>
+    </div>
+    <div class="picks" id="picks-compare"></div>
+    <div id="output-compare"></div>
+  </div>
 
   <div class="footer">Built by Prem • AI Equity Research Copilot • Powered by Gemini AI</div>
 </div>
 
 <script>
-// ============================================================
-// PASTE YOUR FREE GEMINI API KEY BELOW (get it from aistudio.google.com)
-// ============================================================
 const API_KEY = "AIzaSyDYSBREz07g8HA6YubL2Rg8_VqTDuV4j0w";
-// ============================================================
 
 const picks = [
   {t:"AAPL",n:"Apple",f:"🇺🇸"},{t:"NVDA",n:"Nvidia",f:"🇺🇸"},{t:"MSFT",n:"Microsoft",f:"🇺🇸"},
@@ -114,28 +171,39 @@ const picks = [
   {t:"HDFCBANK",n:"HDFC Bank",f:"🇮🇳"},{t:"ITC",n:"ITC",f:"🇮🇳"},{t:"WIPRO",n:"Wipro",f:"🇮🇳"},
 ];
 
+const comparePairs = [
+  {a:"AAPL",b:"MSFT",l:"Tech Giants"},{a:"RELIANCE",b:"TCS",l:"India's Largest"},
+  {a:"NVDA",b:"GOOGL",l:"AI Leaders"},{a:"INFY",b:"WIPRO",l:"Indian IT"},
+];
+
 const secStyles = {
-  overview:{ic:"🏢",c:"#0C447C"},metric:{ic:"📊",c:"#085041"},catalyst:{ic:"📰",c:"#3C3489"},
-  development:{ic:"📰",c:"#3C3489"},risk:{ic:"⚠️",c:"#991B1B"},bull:{ic:"⚖️",c:"#854D0E"},
-  bear:{ic:"⚖️",c:"#854D0E"},peer:{ic:"🔍",c:"#9A3412"},competit:{ic:"🔍",c:"#9A3412"},
-  landscape:{ic:"🔍",c:"#9A3412"},thesis:{ic:"📋",c:"#166534"},summary:{ic:"📋",c:"#166534"},
+  overview:{ic:"🏢",c:"#0C447C",tip:"What the company does and its market position"},
+  metric:{ic:"📊",c:"#085041",tip:"Core financial numbers at a glance"},
+  catalyst:{ic:"📰",c:"#3C3489",tip:"Recent events that could move the stock price"},
+  development:{ic:"📰",c:"#3C3489",tip:"Recent events that could move the stock price"},
+  risk:{ic:"⚠️",c:"#991B1B",tip:"Threats that could hurt the company"},
+  bull:{ic:"⚖️",c:"#854D0E",tip:"Bull = reasons to buy, Bear = reasons to avoid"},
+  bear:{ic:"⚖️",c:"#854D0E",tip:""},
+  peer:{ic:"🔍",c:"#9A3412",tip:"How this company stacks up against rivals"},
+  competit:{ic:"🔍",c:"#9A3412",tip:""},
+  landscape:{ic:"🔍",c:"#9A3412",tip:""},
+  thesis:{ic:"📋",c:"#166534",tip:"The bottom line — buy, hold, or avoid?"},
+  summary:{ic:"📋",c:"#166534",tip:""},
 };
 
-function getSS(t){const l=t.toLowerCase();for(const[k,v]of Object.entries(secStyles)){if(l.includes(k))return v;}return{ic:"📄",c:"#444"};}
+function getSS(t){const l=t.toLowerCase();for(const[k,v]of Object.entries(secStyles)){if(l.includes(k))return v;}return{ic:"📄",c:"#444",tip:""};}
 
-const prompt = (tk) => `You are a senior equity research analyst at Goldman Sachs. Generate a detailed, data-rich equity research brief for the stock: ${tk}.
+const buildPrompt = (tk) => `You are a senior equity research analyst at Goldman Sachs. Generate a detailed, data-rich equity research brief for: ${tk}.
 
-Use INR (₹) for Indian stocks (NSE/BSE listed). Use USD ($) for US stocks.
-Be specific with real numbers — never say "significant" without a number.
-Write authoritatively. Do NOT mention data limitations.
+Use INR for Indian stocks (NSE/BSE). Use USD for US stocks. Be specific with real numbers. Write authoritatively. Do NOT mention data limitations.
 
-Use EXACTLY these ## markdown section headers:
+Use EXACTLY these ## markdown headers:
 
 ## Company Overview
-3-4 sentences: what the company does, CEO name, HQ, number of employees, business segments, market position.
+3-4 sentences: business, CEO, HQ, employees, segments, market position.
 
 ## Key Financial Metrics
-Use this exact bullet format (fill ALL):
+Bullets with **Label**: Value format:
 - **Market Cap**: [number]
 - **Stock Price (Approx)**: [number]
 - **P/E Ratio**: [number]
@@ -147,204 +215,201 @@ Use this exact bullet format (fill ALL):
 - **Dividend Yield**: [% or N/A]
 
 ## Recent Catalysts & Developments
-4 bullets. Each MUST start with a bold date like **Q3 2025:** followed by 2 sentences with specific numbers.
+4 bullets starting with **[Date/Quarter]:** then 2 sentences with numbers.
 
 ## Risk Factors
-4 bullets. Each MUST start with a bold title like **Regulatory Risk:** followed by 2 sentences specific to THIS company.
+4 bullets starting with **[Risk Title]:** then 2 sentences specific to this company.
 
 ## Bull Case vs Bear Case
-**Bull Case:** 3 sentences with specific growth drivers and numbers.
-**Bear Case:** 3 sentences with specific concerns and numbers.
+**Bull Case:** 3 sentences with specific numbers.
+**Bear Case:** 3 sentences with specific numbers.
 
 ## Competitive Landscape
-3 bullets: **[Competitor Name]**: 1-2 sentences comparing.
-Then: **Competitive Moat:** 2 sentences on durable advantage.
+3 bullets: **[Competitor]**: 1-2 sentences.
+Then: **Competitive Moat:** 2 sentences.
 
 ## Investment Thesis
-4 sentences. Synthesize everything. End with exactly: **Outlook: Bullish** or **Outlook: Neutral** or **Outlook: Bearish**`;
+4 sentences. End with exactly: **Outlook: Bullish** or **Outlook: Neutral** or **Outlook: Bearish**`;
 
-let currentTicker = "";
-let stepInterval = null;
+// --- Render picks ---
+function renderPicks(container, type) {
+  const el = document.getElementById(container);
+  if(type === "single") {
+    picks.forEach(p => {
+      const b = document.createElement("button");
+      b.textContent = `${p.f} ${p.t}`;
+      b.onclick = () => { document.getElementById("ticker").value = p.t; analyzeSingle(); };
+      el.appendChild(b);
+    });
+  } else {
+    comparePairs.forEach(p => {
+      const b = document.createElement("button");
+      b.textContent = `${p.a} vs ${p.b}`;
+      b.onclick = () => { document.getElementById("ticker-a").value = p.a; document.getElementById("ticker-b").value = p.b; analyzeCompare(); };
+      el.appendChild(b);
+    });
+  }
+}
+renderPicks("picks-single","single");
+renderPicks("picks-compare","compare");
 
-// Render picks
-const picksEl = document.getElementById("picks");
-picks.forEach(p => {
-  const b = document.createElement("button");
-  b.textContent = `${p.f} ${p.t} ${p.n}`;
-  b.onclick = () => { document.getElementById("ticker").value = p.t; analyze(); };
-  picksEl.appendChild(b);
-});
+// --- Tab switching ---
+function switchTab(tab) {
+  document.querySelectorAll(".tab").forEach((t,i) => t.classList.toggle("active", (tab==="single"?0:1)===i));
+  document.getElementById("panel-single").classList.toggle("show", tab==="single");
+  document.getElementById("panel-compare").classList.toggle("show", tab==="compare");
+}
 
-document.getElementById("ticker").addEventListener("keydown", e => { if(e.key === "Enter") analyze(); });
+function toggleGuide(){ document.getElementById("guide").classList.toggle("show"); }
 
-async function analyze() {
+// --- Enter key support ---
+document.getElementById("ticker").addEventListener("keydown", e => { if(e.key==="Enter") analyzeSingle(); });
+document.getElementById("ticker-a").addEventListener("keydown", e => { if(e.key==="Enter") analyzeCompare(); });
+document.getElementById("ticker-b").addEventListener("keydown", e => { if(e.key==="Enter") analyzeCompare(); });
+
+// --- API Call ---
+async function callGemini(tk) {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ contents:[{parts:[{text:buildPrompt(tk)}]}], generationConfig:{maxOutputTokens:3000,temperature:0.7} })
+  });
+  const data = await res.json();
+  if(data.error) throw new Error(data.error.message);
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+  if(text.length < 100) throw new Error("Response too short. Try a well-known stock.");
+  return text;
+}
+
+// --- Loading ---
+function showLoading(el, tk) {
+  const steps = ["Pulling company profile...","Analyzing financials...","Scanning catalysts...","Evaluating risks...","Building thesis...","Generating brief..."];
+  let step = 0;
+  const render = () => {
+    el.innerHTML = `<div class="loading"><div class="spinner"></div><h3>Researching ${tk}</h3><p>${steps[Math.min(step,5)]}</p><div class="pbar"><div class="pbar-fill" style="width:${((step+1)/6)*100}%"></div></div></div>`;
+  };
+  render();
+  return setInterval(() => { step = Math.min(step+1,5); render(); }, 2200);
+}
+
+// --- Single Stock ---
+async function analyzeSingle() {
   const tk = document.getElementById("ticker").value.trim().toUpperCase();
   if(!tk) return;
-  if(API_KEY === "YOUR_API_KEY_HERE") {
-    document.getElementById("output").innerHTML = `<div class="error">Please add your free Gemini API key first.<br><br>1. Go to <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a><br>2. Click "Create API Key"<br>3. Copy the key<br>4. Replace YOUR_API_KEY_HERE in the code</div>`;
-    return;
-  }
-  currentTicker = tk;
-  document.getElementById("go").disabled = true;
-  document.getElementById("go").textContent = "Analyzing...";
-
-  // Highlight active pick
-  document.querySelectorAll(".picks button").forEach(b => b.classList.remove("active"));
-  document.querySelectorAll(".picks button").forEach(b => { if(b.textContent.includes(tk)) b.classList.add("active"); });
-
-  const steps = ["Pulling company profile...","Analyzing financials...","Scanning news & catalysts...","Evaluating risk factors...","Building investment thesis...","Generating brief..."];
-  let step = 0;
-  const renderLoading = () => {
-    document.getElementById("output").innerHTML = `
-      <div class="loading">
-        <div class="spinner"></div>
-        <h3>Researching ${tk}</h3>
-        <p>${steps[Math.min(step,5)]}</p>
-        <div class="progress">${steps.map((_,i) => `<div class="dot ${i<=step?'on':''}"></div>`).join("")}</div>
-      </div>`;
-  };
-  renderLoading();
-  stepInterval = setInterval(() => { step = Math.min(step+1, 5); renderLoading(); }, 2500);
-
+  const out = document.getElementById("output-single");
+  const btn = document.getElementById("go");
+  btn.disabled = true; btn.textContent = "Analyzing...";
+  document.querySelectorAll("#picks-single button").forEach(b => b.classList.toggle("active", b.textContent.includes(tk)));
+  const iv = showLoading(out, tk);
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt(tk) }] }],
-        generationConfig: { maxOutputTokens: 3000, temperature: 0.7 }
-      })
-    });
-    clearInterval(stepInterval);
-    const data = await res.json();
-    
-    if(data.error) {
-      document.getElementById("output").innerHTML = `<div class="error">${data.error.message}<button onclick="analyze()">Retry</button></div>`;
-      resetBtn(); return;
-    }
-
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    if(text.length < 100) {
-      document.getElementById("output").innerHTML = `<div class="error">Response too short. Try a well-known stock.<button onclick="analyze()">Retry</button></div>`;
-      resetBtn(); return;
-    }
-
-    renderBrief(tk, text);
+    const text = await callGemini(tk);
+    clearInterval(iv);
+    out.innerHTML = renderBrief(tk, text);
   } catch(e) {
-    clearInterval(stepInterval);
-    document.getElementById("output").innerHTML = `<div class="error">Connection error: ${e.message}<button onclick="analyze()">Retry</button></div>`;
+    clearInterval(iv);
+    out.innerHTML = `<div class="error">${e.message}<button onclick="analyzeSingle()">Retry</button></div>`;
   }
-  resetBtn();
+  btn.disabled = false; btn.textContent = "Generate →";
 }
 
-function resetBtn() {
-  document.getElementById("go").disabled = false;
-  document.getElementById("go").textContent = "Generate →";
+// --- Compare ---
+async function analyzeCompare() {
+  const a = document.getElementById("ticker-a").value.trim().toUpperCase();
+  const b = document.getElementById("ticker-b").value.trim().toUpperCase();
+  if(!a || !b) return;
+  const out = document.getElementById("output-compare");
+  const btn = document.getElementById("go-compare");
+  btn.disabled = true; btn.textContent = "Comparing...";
+  out.innerHTML = `<div class="compare-results"><div id="comp-a"></div><div id="comp-b"></div></div>`;
+  const ivA = showLoading(document.getElementById("comp-a"), a);
+  const ivB = showLoading(document.getElementById("comp-b"), b);
+  try {
+    const [txtA, txtB] = await Promise.all([callGemini(a), callGemini(b)]);
+    clearInterval(ivA); clearInterval(ivB);
+    document.getElementById("comp-a").innerHTML = renderBrief(a, txtA);
+    document.getElementById("comp-b").innerHTML = renderBrief(b, txtB);
+  } catch(e) {
+    clearInterval(ivA); clearInterval(ivB);
+    out.innerHTML = `<div class="error">${e.message}<button onclick="analyzeCompare()">Retry</button></div>`;
+  }
+  btn.disabled = false; btn.textContent = "Compare →";
 }
 
+// --- Render Brief ---
 function renderBrief(tk, text) {
   const sections = parseSections(text);
   const outlook = getOutlook(text);
-  const badgeClass = outlook === "Bullish" ? "badge-bull" : outlook === "Bearish" ? "badge-bear" : "badge-neutral";
-  const emoji = outlook === "Bullish" ? "🟢" : outlook === "Bearish" ? "🔴" : "🟡";
+  const bc = outlook==="Bullish"?"badge-bull":outlook==="Bearish"?"badge-bear":"badge-neutral";
+  const em = outlook==="Bullish"?"🟢":outlook==="Bearish"?"🔴":"🟡";
   const date = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
 
-  let html = `
-    <div class="result-hdr">
-      <h2>${tk} Research Brief</h2>
-      <span class="badge ${badgeClass}">${emoji} ${outlook}</span>
-    </div>
-    <div class="meta">${date} • AI-generated with Gemini</div>`;
+  let h = `<div class="result-hdr"><h2>${tk}</h2><span class="badge ${bc}">${em} ${outlook}</span></div>
+    <div class="meta">${date} • AI-generated research brief</div>
+    <div class="toolbar"><button class="btn-pdf" onclick="exportPDF('${tk}')">📄 Export PDF</button><button class="btn-new" onclick="document.getElementById('ticker').value='';document.getElementById('ticker').focus()">+ New Brief</button></div>`;
 
   sections.forEach(sec => {
     const s = getSS(sec.t);
-    const isBullBear = sec.t.toLowerCase().includes("bull") && sec.t.toLowerCase().includes("bear");
-    
-    html += `<div class="sec"><div class="sec-hdr"><span class="icon">${s.ic}</span><span class="label" style="color:${s.c}">${sec.t}</span><div class="line" style="background:${s.c}22"></div></div>`;
-
-    if(sec.t.toLowerCase().includes("metric")) {
-      html += renderMetrics(sec.c);
-    } else if(sec.t.toLowerCase().includes("catalyst") || sec.t.toLowerCase().includes("development")) {
-      html += renderCatalysts(sec.c);
-    } else if(sec.t.toLowerCase().includes("risk")) {
-      html += renderRisks(sec.c);
-    } else if(isBullBear) {
-      html += renderBullBear(sec.c);
-    } else if(sec.t.toLowerCase().includes("thesis") || sec.t.toLowerCase().includes("summary")) {
-      html += `<div class="thesis-box">${formatText(sec.c)}</div>`;
-    } else {
-      html += `<div class="sec-body">${formatText(sec.c)}</div>`;
-    }
-    html += `</div>`;
+    const isBB = sec.t.toLowerCase().includes("bull") && sec.t.toLowerCase().includes("bear");
+    h += `<div class="sec"><div class="sec-hdr"><span class="icon">${s.ic}</span><span class="label" style="color:${s.c}">${sec.t}</span><div class="line" style="background:${s.c}22"></div>${s.tip?`<span class="hint" style="background:${s.c}15;color:${s.c}" title="${s.tip}">?</span>`:""}</div>`;
+    if(sec.t.toLowerCase().includes("metric")) h += renderMetrics(sec.c);
+    else if(sec.t.toLowerCase().includes("catalyst")||sec.t.toLowerCase().includes("development")) h += renderCatalysts(sec.c);
+    else if(sec.t.toLowerCase().includes("risk")) h += renderRisks(sec.c);
+    else if(isBB) h += renderBullBear(sec.c);
+    else if(sec.t.toLowerCase().includes("thesis")||sec.t.toLowerCase().includes("summary")) h += `<div class="thesis-box">${fmtTxt(sec.c)}</div>`;
+    else h += `<div class="sec-body">${fmtTxt(sec.c)}</div>`;
+    h += `</div>`;
   });
-
-  html += `<div class="disc">AI-generated equity research brief for informational purposes only. Not financial advice. Always conduct independent due diligence before making investment decisions.</div>`;
-  document.getElementById("output").innerHTML = html;
+  h += `<div class="disc">AI-generated equity research brief for informational purposes only. Not financial advice. Always conduct independent due diligence.</div>`;
+  return h;
 }
 
-function parseSections(text) {
-  const secs = []; let cur = null, buf = [];
-  text.split("\n").forEach(ln => {
-    if(ln.startsWith("## ")) {
-      if(cur) secs.push({t:cur,c:buf.join("\n").trim()});
-      cur = ln.slice(3).trim(); buf = [];
-    } else if(cur !== null) buf.push(ln);
-  });
-  if(cur) secs.push({t:cur,c:buf.join("\n").trim()});
-  return secs;
+function parseSections(t){const s=[];let c=null,b=[];t.split("\n").forEach(l=>{if(l.startsWith("## ")){if(c)s.push({t:c,c:b.join("\n").trim()});c=l.slice(3).trim();b=[];}else if(c!==null)b.push(l);});if(c)s.push({t:c,c:b.join("\n").trim()});return s;}
+function getOutlook(t){if(/Outlook:\s*Bullish/i.test(t))return"Bullish";if(/Outlook:\s*Bearish/i.test(t))return"Bearish";return"Neutral";}
+function fmtTxt(t){return t.split("\n").map(l=>{if(!l.trim())return"<div style='height:4px'></div>";l=l.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");if(l.trim().startsWith("- "))return`<div style="padding:3px 0 3px 18px;position:relative"><span style="position:absolute;left:3px;color:#aaa">•</span>${l.trim().slice(2)}</div>`;return`<div style="padding:2px 0">${l}</div>`;}).join("");}
+
+function renderMetrics(c){return c.split("\n").filter(l=>l.trim().startsWith("- ")).map(l=>{const m=l.match(/\*\*(.+?)\*\*:\s*(.+)/);if(m)return`<div class="metric-row"><span class="metric-label">${m[1]}</span><span class="metric-val">${m[2].replace(/\*\*/g,"")}</span></div>`;return"";}).join("");}
+
+function renderCatalysts(c){let h='<div style="border-left:2px solid #EEEDFE;margin-left:4px;padding-left:16px">';c.split("\n").filter(l=>l.trim().startsWith("- ")).forEach(l=>{const m=l.match(/\*\*(.+?)\*\*:?\s*(.*)/);if(m)h+=`<div class="catalyst"><div class="dot"></div><div class="date">${m[1]}</div><div class="desc">${m[2].replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")}</div></div>`;});return h+"</div>";}
+
+function renderRisks(c){let h="";c.split("\n").filter(l=>l.trim().startsWith("- ")).forEach(l=>{const m=l.match(/\*\*(.+?)\*\*:?\s*(.*)/);if(m)h+=`<div class="risk-card"><div class="risk-title">${m[1]}</div><div class="risk-detail">${m[2].replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")}</div></div>`;});return h;}
+
+function renderBullBear(c){const p=c.split(/\*\*Bear Case:?\*\*/i);const bu=(p[0]||"").replace(/\*\*Bull Case:?\*\*/i,"").replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").trim();const be=(p[1]||"").replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").trim();return`<div class="split"><div class="bull-box"><div class="case-label bull-label">🟢 Bull Case</div><div class="case-text">${bu}</div></div><div class="bear-box"><div class="case-label bear-label">🔴 Bear Case</div><div class="case-text">${be}</div></div></div>`;}
+
+// --- PDF Export ---
+function exportPDF(tk) {
+  const brief = document.querySelector(`h2`)?.closest(".sec")?.parentElement;
+  const sections = document.querySelectorAll(".sec");
+  const w = window.open("","_blank");
+  let body = "";
+  sections.forEach(s => { body += s.outerHTML; });
+  w.document.write(`<!DOCTYPE html><html><head><title>${tk} Research Brief</title><style>
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:Georgia,serif;max-width:700px;margin:40px auto;padding:0 24px;color:#1a1a1a;font-size:13px;line-height:1.6}
+    h1{font-size:20px;font-family:system-ui;border-bottom:2px solid #534AB7;padding-bottom:6px;margin-bottom:4px}
+    .meta{font-size:11px;color:#888;margin-bottom:16px}
+    .sec{margin-bottom:16px}.sec-hdr{margin-bottom:6px}.sec-hdr .label{font-size:13px;font-weight:700;color:#534AB7;text-transform:uppercase}
+    .metric-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;font-size:12px}
+    .metric-label{font-weight:600}.metric-val{font-weight:700;color:#085041}
+    .risk-card{padding:6px 0;border-bottom:1px solid #f5f5f5}.risk-title{font-weight:700;color:#991B1B;font-size:12px}.risk-detail{font-size:12px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bull-box,.bear-box{padding:8px;border-radius:6px;font-size:12px}
+    .bull-box{background:#F0FDF4;border:1px solid #BBF7D0}.bear-box{background:#FEF2F2;border:1px solid #FECACA}
+    .case-label{font-size:10px;font-weight:700;margin-bottom:4px}.bull-label{color:#166534}.bear-label{color:#991B1B}
+    .thesis-box{padding:10px;background:#F0FDF4;border:1px solid #A7F3D0;border-radius:6px;font-size:13px;line-height:1.7}
+    .catalyst{padding:4px 0;font-size:12px}.catalyst .date{font-weight:700;color:#534AB7;font-size:11px}
+    .disc{font-size:9px;color:#aaa;margin-top:20px;padding-top:8px;border-top:1px solid #eee}
+    .toolbar,.badge,.hint,.pbar,.line,.picks,.tabs,.hdr,.guide,.icon,.dot{display:none!important}
+    strong{font-weight:700}
+  </style></head><body>
+    <h1>${tk} — Equity Research Brief</h1>
+    <div class="meta">Generated ${new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})} • AI Equity Research Copilot by Prem</div>
+    ${body}
+    <div class="disc">AI-generated research brief for informational purposes only. Not financial advice.</div>
+    <script>setTimeout(()=>window.print(),600)<\/script>
+  </body></html>`);
 }
 
-function getOutlook(text) {
-  if(text.includes("Outlook: Bullish") || text.includes("Outlook: bullish")) return "Bullish";
-  if(text.includes("Outlook: Bearish") || text.includes("Outlook: bearish")) return "Bearish";
-  return "Neutral";
-}
-
-function formatText(t) {
-  return t.split("\n").map(ln => {
-    if(!ln.trim()) return "<div style='height:4px'></div>";
-    ln = ln.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-    if(ln.trim().startsWith("- ")) return `<div style="padding:3px 0 3px 18px;position:relative"><span style="position:absolute;left:3px;color:#aaa">•</span>${ln.trim().slice(2)}</div>`;
-    return `<div style="padding:2px 0">${ln}</div>`;
-  }).join("");
-}
-
-function renderMetrics(c) {
-  return c.split("\n").filter(l => l.trim().startsWith("- ")).map(ln => {
-    const m = ln.match(/\*\*(.+?)\*\*:\s*(.+)/);
-    if(m) return `<div class="metric-row"><span class="metric-label">${m[1]}</span><span class="metric-val">${m[2]}</span></div>`;
-    return "";
-  }).join("");
-}
-
-function renderCatalysts(c) {
-  let html = '<div style="border-left:2px solid #EEEDFE;margin-left:4px;padding-left:16px">';
-  c.split("\n").filter(l => l.trim().startsWith("- ")).forEach(ln => {
-    const m = ln.match(/\*\*(.+?)\*\*:?\s*(.*)/);
-    if(m) html += `<div class="catalyst"><div class="dot"></div><div class="date">${m[1]}</div><div class="desc">${m[2]}</div></div>`;
-  });
-  html += "</div>";
-  return html;
-}
-
-function renderRisks(c) {
-  let html = "";
-  c.split("\n").filter(l => l.trim().startsWith("- ")).forEach(ln => {
-    const m = ln.match(/\*\*(.+?)\*\*:?\s*(.*)/);
-    if(m) html += `<div class="risk-card"><div class="risk-title">${m[1]}</div><div class="risk-detail">${m[2]}</div></div>`;
-  });
-  return html;
-}
-
-function renderBullBear(c) {
-  const parts = c.split(/\*\*Bear Case:?\*\*/i);
-  const bull = (parts[0]||"").replace(/\*\*Bull Case:?\*\*/i,"").replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").trim();
-  const bear = (parts[1]||"").replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").trim();
-  return `<div class="split">
-    <div class="bull-box"><div class="case-label bull-label">🟢 Bull Case</div><div class="case-text">${bull}</div></div>
-    <div class="bear-box"><div class="case-label bear-label">🔴 Bear Case</div><div class="case-text">${bear}</div></div>
-  </div>`;
-}
+// --- Empty state ---
+document.getElementById("output-single").innerHTML = `<div class="empty"><div class="big">📊</div><p>Enter any stock ticker to generate a research brief</p><div class="sub">Supports NYSE, NASDAQ, NSE, BSE and more</div></div>`;
+document.getElementById("output-compare").innerHTML = `<div class="empty"><div class="big">⚖️</div><p>Enter two tickers above or pick a suggested pair</p><div class="sub">See two companies analyzed side by side</div></div>`;
 </script>
 </body>
 </html>
